@@ -1,0 +1,3 @@
+# ignore ansible-lint warnings
+skip_list:
+  - no-handler  # Tasks that run when changed should likely be handlers

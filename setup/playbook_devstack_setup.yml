@@ -1,0 +1,149 @@
+---
+
+- name: DevStack setup for OpenStack development
+  hosts: all
+  become: true
+  vars:
+    devstack_user_name: 'stack'
+    devstack_user_home: '/opt/stack'
+    devstack_user_shell: '/bin/bash'
+
+    devstack_repo_url: 'https://opendev.org/openstack/devstack.git'
+    devstack_repo_branch: 'master'
+    devstack_repo_depth: 1
+
+    devstack_install_dir: '{{ devstack_user_home }}/devstack'
+
+    devstack_lvm_vg_name: 'devstack'
+    devstack_lvm_vg_size: 30G
+    devstack_lvm_be_name: 'lvmdriver-1'
+    devstack_lvm_lv_prefix: 'volume-'
+
+    devstack_services_enabled:
+      # keystone services
+      - 'key'
+      # nova services with SPICE support
+      - 'n-api'
+      - 'n-api-meta'
+      - 'n-cpu'
+      - 'n-cond'
+      - 'n-sch'
+      - 'n-spice'
+      # placement services for nova
+      - 'placement-api'
+      - 'placement-client'
+      # glance services for nova
+      - 'g-api'
+      # cinder services
+      - 'c-sch'
+      - 'c-api'
+      - 'c-vol'
+      # OVN services
+      - 'ovn-controller'
+      - 'ovn-northd'
+      - 'ovs-vswitchd'
+      - 'ovsdb-server'
+      # neutron services
+      - 'q-svc'
+      - 'q-ovn-metadata-agent'
+      # dashbord services
+      - 'horizon'
+      # additional services
+      - 'rabbit'
+      - 'tempest'
+      - 'mysql'
+      - 'etcd3'
+      - 'dstat'
+    devstack_services_disabled:
+      # nova services with VNC support
+      - 'n-novnc'
+
+    devstack_svc_cinder_backends_enabled:
+      - 'lvm:{{ devstack_lvm_be_name }}'
+    devstack_svc_cinder_img_cache_enabled: false
+
+    devstack_setup_pw_admin: devstack
+    devstack_setup_pw_database: devstack
+    devstack_setup_pw_rabbit: devstack
+    devstack_setup_pw_service: devstack
+
+  tasks:
+    - name: Install required dependencies
+      ansible.builtin.package:
+        name:
+          - python3
+          - git
+          - acl
+        state: present
+
+    - name: Create user '{{ devstack_user_name }}' for DevStack setup
+      ansible.builtin.user:
+        name: '{{ devstack_user_name }}'
+        create_home: yes
+        home: '{{ devstack_user_home }}'
+        shell: '{{ devstack_user_shell }}'
+
+    - name: Grant root privileges to user '{{ devstack_user_name }}'
+      ansible.builtin.copy:
+        dest: '/etc/sudoers.d/{{ devstack_user_name }}'
+        content: |
+          {{ devstack_user_name }} ALL=(ALL) NOPASSWD: ALL
+        owner: root
+        group: root
+        mode: '0440'
+
+    - name: Clone DevStack Git repository
+      become_user: '{{ devstack_user_name }}'
+      become: true
+      ansible.builtin.git:
+        repo: '{{ devstack_repo_url }}'
+        version: '{{ devstack_repo_branch }}'
+        dest: '{{ devstack_install_dir }}'
+        depth: '{{ devstack_repo_depth }}'
+
+    - name: Configure DevStack setup
+      become_user: '{{ devstack_user_name }}'
+      become: true
+      ansible.builtin.copy:
+        dest: '{{ devstack_install_dir }}/local.conf'
+        content: |
+          [[local|localrc]]
+          ADMIN_PASSWORD="{{ devstack_setup_pw_admin }}"
+          DATABASE_PASSWORD="{{ devstack_setup_pw_database }}"
+          RABBIT_PASSWORD="{{ devstack_setup_pw_rabbit }}"
+          SERVICE_PASSWORD="{{ devstack_setup_pw_service }}"
+          
+          # cinder service
+          CINDER_ENABLED_BACKENDS={{ devstack_svc_cinder_backends_enabled | join(',') }}
+          {% if devstack_svc_cinder_img_cache_enabled == false %}
+          CINDER_IMG_CACHE_ENABLED=False
+          {% else %}
+          CINDER_IMG_CACHE_ENABLED=True
+          {% endif %}
+          VOLUME_GROUP_NAME="{{ devstack_lvm_vg_name }}"
+          VOLUME_NAME_PREFIX="{{ devstack_lvm_lv_prefix }}"
+          VOLUME_BACKING_FILE_SIZE={{ devstack_lvm_vg_size }}
+          
+          # enable services
+          {% for service_enabled in devstack_services_enabled %}
+          enable_service {{ service_enabled }}
+          {% endfor %}
+          
+          # disable services
+          {% for service_disabled in devstack_services_disabled %}
+          disable_service {{ service_disabled }}
+          {% endfor %}
+        owner: '{{ devstack_user_name }}'
+        group: '{{ devstack_user_name }}'
+        mode: '0644'
+      register: output_devstack_create_config
+
+    - name: Setup DevStack
+      become_user: '{{ devstack_user_name }}'
+      become: true
+      ansible.builtin.shell:
+        chdir: '{{ devstack_install_dir }}'
+        cmd: |
+          GIT_DEPTH="{{ devstack_repo_depth }}"
+          ./stack.sh
+      when: output_devstack_create_config.changed
