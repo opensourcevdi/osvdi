@@ -25,6 +25,29 @@ This preliminary cloud provides insights and experience to design the necessary 
 GPU virtualization options and remote transport: Direct GPU passthrough (left) or mediated GPU passthrough (middle) for Windows guests, where a framebuffer (virtual desktop) of each Windows guest is encoded as video stream (right), which is transferred to a remote client using the SPICE protocol.
 
 
+## Publication list
+
+**Towards a GPU-Accelerated Open Source VDI for OpenStack**  
+Manuel Bentele, Dirk von Suchodoletz, Manuel Messner, Simon Rettberg  
+Proceedings of the 11th EAI International Conference on Cloud Computing (CloudComp 2021), pages 149-164, 2022.  
+DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12)
+
+```bibtex
+@InProceedings{OpenStackVDI,
+    author={Bentele, Manuel and von Suchodoletz, Dirk and Messner, Manuel and Rettberg, Simon},
+    editor={Khosravi, Mohammad R. and He, Qiang and Dai, Haipeng},
+    title={Towards a GPU-Accelerated Open Source VDI for OpenStack},
+    booktitle={Cloud Computing},
+    year={2022},
+    publisher={Springer International Publishing},
+    address={Cham},
+    pages={149--164},
+    isbn={978-3-030-99191-3},
+    doi={10.1007/978-3-030-99191-3_12}
+}
+```
+
+
 ## Acknowledgments
 
 Part of the activities and insights presented in this project were made possible through preliminary work in the bwGPUL project supported by the Baden-Württemberg Ministry of Science, Research, and the Arts, the collaboration in the PePP project (FBM2020-VA-77-8-01241), and the German NFDI initiative (NFDI 7/1).
