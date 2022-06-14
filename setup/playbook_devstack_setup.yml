@@ -21,39 +21,20 @@
 
     devstack_services_enabled:
       # keystone services
-      - 'key'
+      - 'keystone'
       # nova services with SPICE support
-      - 'n-api'
-      - 'n-api-meta'
-      - 'n-cpu'
-      - 'n-cond'
-      - 'n-sch'
+      - 'nova'
       - 'n-spice'
       # placement services for nova
-      - 'placement-api'
-      - 'placement-client'
-      # glance services for nova
-      - 'g-api'
+      - 'placement'
+      # glance services
+      - 'glance'
       # cinder services
-      - 'c-sch'
-      - 'c-api'
-      - 'c-vol'
-      # OVN services
-      - 'ovn-controller'
-      - 'ovn-northd'
-      - 'ovs-vswitchd'
-      - 'ovsdb-server'
-      # neutron services
-      - 'q-svc'
-      - 'q-ovn-metadata-agent'
+      - 'cinder'
+      # network services
+      - 'neutron'
       # dashbord services
       - 'horizon'
-      # additional services
-      - 'rabbit'
-      - 'tempest'
-      - 'mysql'
-      - 'etcd3'
-      - 'dstat'
     devstack_services_disabled:
       # nova services with VNC support
       - 'n-novnc'
