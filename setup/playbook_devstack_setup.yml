@@ -38,6 +38,9 @@
     devstack_services_disabled:
       # nova services with VNC support
       - 'n-novnc'
+    devstack_plugins_enabled:
+      - name: cyborg
+        giturl: https://opendev.org/openstack/cyborg.git
 
     devstack_svc_cinder_backends_enabled:
       - 'lvm:{{ devstack_lvm_be_name }}'

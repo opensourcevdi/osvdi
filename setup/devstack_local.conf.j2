@@ -27,3 +27,8 @@ enable_service {{ service_enabled }}
 {% for service_disabled in devstack_services_disabled %}
 disable_service {{ service_disabled }}
 {% endfor %}
+
+# enable plugins
+{% for plugin_enabled in devstack_plugins_enabled %}
+enable_plugin {{ plugin_enabled.name }} {{ plugin_enabled.giturl }}
+{% endfor %}
