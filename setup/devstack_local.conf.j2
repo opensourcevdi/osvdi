@@ -1,0 +1,29 @@
+#
+# {{ ansible_managed }}
+#
+[[local|localrc]]
+ADMIN_PASSWORD="{{ devstack_setup_pw_admin }}"
+DATABASE_PASSWORD="{{ devstack_setup_pw_database }}"
+RABBIT_PASSWORD="{{ devstack_setup_pw_rabbit }}"
+SERVICE_PASSWORD="{{ devstack_setup_pw_service }}"
+
+# cinder service
+CINDER_ENABLED_BACKENDS={{ devstack_svc_cinder_backends_enabled | join(',') }}
+{% if devstack_svc_cinder_img_cache_enabled == false %}
+CINDER_IMG_CACHE_ENABLED=False
+{% else %}
+CINDER_IMG_CACHE_ENABLED=True
+{% endif %}
+VOLUME_GROUP_NAME="{{ devstack_lvm_vg_name }}"
+VOLUME_NAME_PREFIX="{{ devstack_lvm_lv_prefix }}"
+VOLUME_BACKING_FILE_SIZE={{ devstack_lvm_vg_size }}
+
+# enable services
+{% for service_enabled in devstack_services_enabled %}
+enable_service {{ service_enabled }}
+{% endfor %}
+
+# disable services
+{% for service_disabled in devstack_services_disabled %}
+disable_service {{ service_disabled }}
+{% endfor %}
