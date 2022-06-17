@@ -41,6 +41,8 @@
     devstack_plugins_enabled:
       - name: cyborg
         giturl: https://opendev.org/openstack/cyborg.git
+      - name: osvdi
+        giturl: https://github.com/bwLehrpool/osvdi.git
 
     devstack_svc_cinder_backends_enabled:
       - 'lvm:{{ devstack_lvm_be_name }}'

@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# lib/osvdi
+# Functions to control the configuration and operation of the **OSVDI** service
+
+# Dependencies:
+#
+# - ``functions`` file
+# - ``DEST``, ``DATA_DIR``, ``REGION_NAME`` must be defined
+
+# ``stack.sh`` calls the entry points in this order:
+#
+# - preinstall_osvdi
+# - install_osvdi
+# - configure_osvdi
+# - init_osvdi
+# - start_osvdi
+# - stop_osvdi
+# - cleanup_osvdi
+
+# Save trace setting
+_XTRACE_LIB_OSVDI="$(set +o | grep xtrace)"
+set +o xtrace
+
+# Pre-install OSVDI service-related files
+function preinstall_osvdi {
+    :
+}
+
+# Install OSVDI service-related files
+function install_osvdi {
+    :
+}
+
+# Configure the OSVDI service
+function configure_osvdi {
+    :
+}
+
+# Initialize the OSVDI service
+function init_osvdi {
+    # create custom OSVDI-related flavors
+    create_flavors_osvdi
+}
+
+# Start the OSVDI service (after OSVDI configuration and initialization)
+function start_osvdi {
+    :
+}
+
+# Shutdown and stop the OSVDI service
+function stop_osvdi {
+    :
+}
+
+# Cleanup all OSVDI service-related files
+function cleanup_osvdi {
+    :
+}
+
+# Create default virtual desktop (vd) flavors for OSVDI
+function create_flavors_osvdi {
+    if is_service_enabled n-api; then
+        if ! openstack --os-region-name="${REGION_NAME}" flavor list | grep -q vd1.tiny; then
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd1 --ram 1024  --disk 10  --vcpus 1  --property hw_rng:allowed=True --property hw_video:ram_max_mb=64   vd1.tiny
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd2 --ram 2048  --disk 20  --vcpus 1  --property hw_rng:allowed=True --property hw_video:ram_max_mb=128  vd1.small
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd3 --ram 4096  --disk 40  --vcpus 2  --property hw_rng:allowed=True --property hw_video:ram_max_mb=256  vd1.medium
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd4 --ram 8192  --disk 80  --vcpus 4  --property hw_rng:allowed=True --property hw_video:ram_max_mb=512  vd1.large
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd5 --ram 16384 --disk 160 --vcpus 8  --property hw_rng:allowed=True --property hw_video:ram_max_mb=1024 vd1.xlarge
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd6 --ram 32768 --disk 320 --vcpus 16 --property hw_rng:allowed=True --property hw_video:ram_max_mb=2048 vd1.2xlarge
+            openstack --os-region-name="${REGION_NAME}" flavor create --id vd7 --ram 65536 --disk 640 --vcpus 32 --property hw_rng:allowed=True --property hw_video:ram_max_mb=4096 vd1.4xlarge
+        fi
+    fi
+}
+
+# Restore xtrace
+${_XTRACE_LIB_OSVDI}

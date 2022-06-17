@@ -1,0 +1,10 @@
+enable_service osvdi
+
+# OSVDI settings
+#
+# Defaults
+# --------
+# Set up default directories
+OSVDI_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
+OSVDI_DEVSTACK_DIR="$OSVDI_DIR/devstack"
+OSVDI_DATA_DIR="${DATA_DIR}/osvdi"
