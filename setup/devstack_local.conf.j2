@@ -7,6 +7,16 @@ DATABASE_PASSWORD="{{ devstack_setup_pw_database }}"
 RABBIT_PASSWORD="{{ devstack_setup_pw_rabbit }}"
 SERVICE_PASSWORD="{{ devstack_setup_pw_service }}"
 
+# glance service
+{% if devstack_svc_glance_default_imgs_enabled == false %}
+DOWNLOAD_DEFAULT_IMAGES=False
+{% else %}
+DOWNLOAD_DEFAULT_IMAGES=True
+{% endif %}
+{% if devstack_svc_glance_custom_imgs | length > 0 %}
+IMAGE_URLS="{{ devstack_svc_glance_custom_imgs | join(',') }}"
+{% endif %}
+
 # cinder service
 CINDER_ENABLED_BACKENDS={{ devstack_svc_cinder_backends_enabled | join(',') }}
 {% if devstack_svc_cinder_img_cache_enabled == false %}

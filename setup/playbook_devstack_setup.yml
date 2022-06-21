@@ -44,6 +44,11 @@
       - name: osvdi
         giturl: https://github.com/bwLehrpool/osvdi.git
 
+    devstack_svc_glance_default_imgs_enabled: false
+    devstack_svc_glance_custom_imgs:
+      - 'https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-$(uname -m)-cloudimg.qcow2'
+      - 'http://download.rockylinux.org/pub/rocky/8/images/Rocky-8-GenericCloud.latest.$(uname -m).qcow2'
+
     devstack_svc_cinder_backends_enabled:
       - 'lvm:{{ devstack_lvm_be_name }}'
     devstack_svc_cinder_img_cache_enabled: false
