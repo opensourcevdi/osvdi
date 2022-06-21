@@ -39,10 +39,10 @@
       # nova services with VNC support
       - 'n-novnc'
     devstack_plugins_enabled:
-      - name: cyborg
-        giturl: https://opendev.org/openstack/cyborg.git
-      - name: osvdi
-        giturl: https://github.com/bwLehrpool/osvdi.git
+      - name: 'cyborg'
+        giturl: 'https://opendev.org/openstack/cyborg.git'
+      - name: 'osvdi'
+        giturl: 'https://github.com/bwLehrpool/osvdi.git'
 
     devstack_svc_glance_default_imgs_enabled: false
     devstack_svc_glance_custom_imgs:
