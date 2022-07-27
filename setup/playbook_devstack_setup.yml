@@ -39,6 +39,8 @@
       # nova services with VNC support
       - 'n-novnc'
     devstack_plugins_enabled:
+      - name: 'blazar'
+        giturl: 'https://opendev.org/openstack/blazar.git'
       - name: 'cyborg'
         giturl: 'https://opendev.org/openstack/cyborg.git'
       - name: 'osvdi'
