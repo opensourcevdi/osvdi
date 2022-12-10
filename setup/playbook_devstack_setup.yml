@@ -22,9 +22,8 @@
     devstack_services_enabled:
       # keystone services
       - 'keystone'
-      # nova services with SPICE support
+      # nova services
       - 'nova'
-      - 'n-spice'
       # placement services for nova
       - 'placement'
       # glance services
@@ -35,9 +34,7 @@
       - 'neutron'
       # dashbord services
       - 'horizon'
-    devstack_services_disabled:
-      # nova services with VNC support
-      - 'n-novnc'
+    devstack_services_disabled: []
     devstack_plugins_enabled:
       - name: 'blazar'
         giturl: 'https://opendev.org/openstack/blazar.git'
@@ -54,6 +51,8 @@
     devstack_svc_cinder_backends_enabled:
       - 'lvm:{{ devstack_lvm_be_name }}'
     devstack_svc_cinder_img_cache_enabled: false
+
+    devstack_svc_nova_console: 'spice'
 
     devstack_setup_pw_admin: devstack
     devstack_setup_pw_database: devstack
@@ -93,6 +92,22 @@
         version: '{{ devstack_repo_branch }}'
         dest: '{{ devstack_install_dir }}'
         depth: '{{ devstack_repo_depth }}'
+
+    - name: Configure DevStack VNC console
+      become_user: '{{ devstack_user_name }}'
+      become: true
+      ansible.builtin.set_fact:
+        devstack_services_enabled: '{{ devstack_services_enabled + ["n-novnc"] }}'
+        devstack_services_disabled: '{{ devstack_services_disabled + ["n-spice"] }}'
+      when: devstack_svc_nova_console == 'vnc'
+
+    - name: Configure DevStack SPICE console
+      become_user: '{{ devstack_user_name }}'
+      become: true
+      ansible.builtin.set_fact:
+        devstack_services_enabled: '{{ devstack_services_enabled + ["n-spice"] }}'
+        devstack_services_disabled: '{{ devstack_services_disabled + ["n-novnc"] }}'
+      when: devstack_svc_nova_console == 'spice'
 
     - name: Configure DevStack setup
       become_user: '{{ devstack_user_name }}'
