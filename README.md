@@ -48,6 +48,11 @@ DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12
 ```
 
 
+## License
+
+The OSVDI project is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0) to be compatible with all official OpenStack projects. See `LICENSE.md` for more information.
+
+
 ## Acknowledgments
 
 Part of the activities and insights presented in this project were made possible through preliminary work in the bwGPUL project supported by the Baden-Württemberg Ministry of Science, Research, and the Arts, the collaboration in the PePP project (FBM2020-VA-77-8-01241), and the German NFDI initiative (NFDI 7/1).
