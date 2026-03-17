@@ -45,6 +45,35 @@ DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12
     isbn={978-3-030-99191-3},
     doi={10.1007/978-3-030-99191-3_12}
 }
+@InProceedings{VDIsched,
+  author = {Bentele, Manuel and von Suchodoletz, Dirk and Messner, Manuel and Piliszek, Radosław},
+  year = {2026},
+  title = {A Resource-aware Scheduling Concept for an OpenStack-based VDI},
+  subtitle = {},
+  booktitle = {Proceedings of the 10th bwHPC Symposium},
+  date = {2026},
+  booksubtitle = {HPC Activities in Baden-Württemberg},
+  booktitleaddon = {Freiburg, September 2024},
+  editor = {Janczyk, Michael and von Suchodoletz, Dirk and Wiebelt, Bernd and Frank, Martin},
+  eventtitle = {10th bwHPC Symposium},
+  publisher = {{KIT Scientific Publishing}, Karlsruhe},
+  pages = {},
+  doi = {},
+}}
+@InProceedings{vdiSPICE,
+  author = {Scherle, Michael and Saur, Armin and Kasireddy, Vivek and Gieschke, Rafael and von Suchodoletz, Dirk},
+  title = {{SPICE for hardware accelerated remote desktop access}},
+  subtitle = {Central building Block of an open source VDI},
+  booktitle = {Proceedings of the 10th bwHPC Symposium},
+  date = {2026},
+  booksubtitle = {HPC Activities in Baden-Württemberg},
+  booktitleaddon = {Freiburg, September 2024},
+  editor = {Janczyk, Michael and von Suchodoletz, Dirk and Wiebelt, Bernd and Frank, Martin},
+  eventtitle = {10th bwHPC Symposium},
+  publisher = {{KIT Scientific Publishing}, Karlsruhe},
+  pages = {127--141},
+  doi = {10.58895/ksp/1000169488-9},
+}
 ```
 
 
@@ -55,4 +84,4 @@ The OSVDI project is distributed under the [Apache License, Version 2.0](https:/
 
 ## Acknowledgments
 
-Part of the activities and insights presented in this project were made possible through preliminary work in the bwGPUL project supported by the Baden-Württemberg Ministry of Science, Research, and the Arts, the collaboration in the PePP project (FBM2020-VA-77-8-01241), and the German NFDI initiative (NFDI 7/1).
+Part of the activities and insights presented in this project were made possible through preliminary work in the bwGPUL project and ongoing activities in the bwCloud 3 project both supported by the Baden-Württemberg Ministry of Science, Research, and the Arts, the collaboration in the PePP project (FBM2020-VA-77-8-01241), and the German NFDI initiative (NFDI 7/1).
