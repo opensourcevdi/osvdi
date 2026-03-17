@@ -59,7 +59,7 @@ DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12
   publisher = {{KIT Scientific Publishing}, Karlsruhe},
   pages = {},
   doi = {},
-}}
+}
 @InProceedings{vdiSPICE,
   author = {Scherle, Michael and Saur, Armin and Kasireddy, Vivek and Gieschke, Rafael and von Suchodoletz, Dirk},
   title = {{SPICE for hardware accelerated remote desktop access}},
@@ -72,7 +72,7 @@ DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12
   eventtitle = {10th bwHPC Symposium},
   publisher = {{KIT Scientific Publishing}, Karlsruhe},
   pages = {127--141},
-  doi = {10.58895/ksp/1000169488-9},
+  doi = {},
 }
 ```
 
