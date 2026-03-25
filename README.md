@@ -34,16 +34,16 @@ DOI: [10.1007/978-3-030-99191-3_12](https://doi.org/10.1007/978-3-030-99191-3_12
 
 ```bibtex
 @InProceedings{OpenStackVDI,
-    author={Bentele, Manuel and von Suchodoletz, Dirk and Messner, Manuel and Rettberg, Simon},
-    editor={Khosravi, Mohammad R. and He, Qiang and Dai, Haipeng},
-    title={Towards a GPU-Accelerated Open Source VDI for OpenStack},
-    booktitle={Cloud Computing},
-    year={2022},
-    publisher={Springer International Publishing},
-    address={Cham},
-    pages={149--164},
-    isbn={978-3-030-99191-3},
-    doi={10.1007/978-3-030-99191-3_12}
+  author={Bentele, Manuel and von Suchodoletz, Dirk and Messner, Manuel and Rettberg, Simon},
+  editor={Khosravi, Mohammad R. and He, Qiang and Dai, Haipeng},
+  title={Towards a GPU-Accelerated Open Source VDI for OpenStack},
+  booktitle={Cloud Computing},
+  year={2022},
+  publisher={Springer International Publishing},
+  address={Cham},
+  pages={149--164},
+  isbn={978-3-030-99191-3},
+  doi={10.1007/978-3-030-99191-3_12}
 }
 @InProceedings{VDIsched,
   author = {Bentele, Manuel and von Suchodoletz, Dirk and Messner, Manuel and Piliszek, Radosław},
